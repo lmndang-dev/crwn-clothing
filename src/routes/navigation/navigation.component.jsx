@@ -5,6 +5,11 @@ import { Fragment } from "react/jsx-runtime";
 //Link container help to navigate to another route
 import { Outlet, Link } from "react-router-dom";
 
+//Create react element for the logo img
+import {ReactComponent as CrwnLogo} from "../../assets/crown.svg";
+
+import "./navigation.styles.scss";
+
 //Outlet help nested navigation page and keep the navigation bar stay the same
 const Navigation = () => {
     return (
@@ -13,7 +18,7 @@ const Navigation = () => {
                 {/* The Link component in react routing behave similar to anchor html element */}
                 {/* When user click on logo, direct user back to homepage */}
                 <Link className="logo-container" to="/">
-                    <div>Logo</div>
+                    <CrwnLogo className="logo"/>
                 </Link>
                 
                 <div className="nav-links-container">
