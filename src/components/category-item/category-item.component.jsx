@@ -2,7 +2,15 @@ import "./category-item.styles.scss"
 
 const CategoryItem = ({category}) => {
 
+    //Destructured item from category object 
+    // {
+    //   id: 2,
+    //   title: "jackets",
+    //   imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+    // },
     const {imageUrl, title} = category;
+
+    //Return the container of one category item
     return (
         <div className="category-container">
           <div
