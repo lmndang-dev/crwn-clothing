@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
-//Google popup authentication library
+//Google sign in authentication library
 import {
   getAuth,
   signInWithRedirect,
@@ -34,14 +34,20 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-//Declare the google provider to customize
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+//Declare the google windows to choose the Google account for authenticate
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
-
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
+//Sign in with Google popup
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+
+//Sign in with redirect
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 //Added user that authenticated in to the firestore database user the users list
 //Create database object
