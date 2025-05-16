@@ -21,9 +21,17 @@ const Navigation = () => {
                     <CrwnLogo className="logo"/>
                 </Link>
                 
+                
                 <div className="nav-links-container">
+
+                    {/* Add shop route to navigation bar */}
                     <Link className="nav-link" to="/shop">
-                        Shop
+                        SHOP
+                    </Link>
+
+                    {/* Add Sign In route to navigation bar */}
+                    <Link className="nav-link" to="/sign-in">
+                        SIGN IN
                     </Link>
                 </div>
             </div>
