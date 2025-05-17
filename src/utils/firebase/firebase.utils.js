@@ -7,6 +7,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 //Firestone database library
@@ -54,7 +55,11 @@ export const signInWithGoogleRedirect = () =>
 export const db = getFirestore();
 
 //Function to added authenticated user to users collection
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation
+) => {
+  if (!userAuth) return;
   //userAuth object attribute
   // displayName: "Le Minh Nhat Dang"
   // email: "lmndang.toronto@gmail.com"
@@ -80,6 +85,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("error creating the user", error.message);
@@ -89,4 +95,11 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   //Check if the user data exists
 
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  //Return the user object that created from the email and password
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
