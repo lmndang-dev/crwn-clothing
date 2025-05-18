@@ -5,6 +5,8 @@ import { Fragment, useContext } from "react";
 //Link container help to navigate to another route
 import { Outlet, Link } from "react-router-dom";
 
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 //Create react element for the logo img
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
@@ -45,7 +47,10 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          {/* Add cart icon to navigation bar */}
+          <CartIcon />
         </div>
+        <CartDropdown />
       </div>
 
       {/* This outlet help navigate the page under the navigation bar */}
