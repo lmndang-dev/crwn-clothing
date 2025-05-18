@@ -6,6 +6,7 @@ import "./index.scss";
 
 import App from "./App";
 import { UserProvider } from "./contexts/user.context";
+import { ProductsProvider } from "./contexts/products.context";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -20,7 +21,12 @@ root.render(
       {/* This allows any component in the app to access the user context using the useContext hook */}
       {/* The UserProvider component is imported from the user.context file */}
       <UserProvider>
-        <App />
+        {/* The ProductsProvider component wraps the App component, providing the products context to all components within the app */}
+        {/* This allows any component in the app to access the products context using the useContext hook */}
+        {/* The ProductsProvider component is imported from the products.context file */}
+        <ProductsProvider>
+          <App />
+        </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
