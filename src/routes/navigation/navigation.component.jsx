@@ -9,6 +9,7 @@ import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
 import { UserContext } from "../../contexts/user.context";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
 
@@ -16,7 +17,13 @@ import "./navigation.styles.scss";
 const Navigation = () => {
   //Get the currentUser from the UserContext
   //The UserContext is imported from the user.context file
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const signOutHandler = async () => {
+    //Sign out the user from the firebase authentication
+    await signOutUser();
+    setCurrentUser(null);
+  };
 
   return (
     <Fragment>
@@ -33,10 +40,17 @@ const Navigation = () => {
             SHOP
           </Link>
 
-          {/* Add Sign In route to navigation bar */}
-          <Link className="nav-link" to="/auth">
-            SIGN IN
-          </Link>
+          {/* If user is logged in, show the sign out button */}
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutHandler}>
+              SIGN OUT
+            </span>
+          ) : (
+            // If user is not logged in, show the sign in button
+            <Link className="nav-link" to="/auth">
+              SIGN IN
+            </Link>
+          )}
         </div>
       </div>
 

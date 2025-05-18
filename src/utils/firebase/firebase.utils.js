@@ -2,15 +2,21 @@
 import { initializeApp } from "firebase/app";
 
 //Google sign in authentication library
+//This library will help to sign in with Google account
+//This library will help to sign in with email and password
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
-//Firestone database library
+//Firestore database library
+//This library will help to interact with the firestore database
+//This library will help to add, update, delete and get data from the firestore database
+//This library will help to create a collection and document in the firestore database
 import {
   getFirestore,
   doc,
@@ -107,7 +113,6 @@ export const createUserDocumentFromAuth = async (
 /*============= Added user that authenticated in to the firestore database user the users list =============*/
 
 //This function will create a new user with email and password
-//This function will return the user object that is authenticated with email and password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
@@ -116,10 +121,14 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 //This function will sign in the user with email and password
-//This function will return the user object that is authenticated with email and password
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  //Check if the email and password are not empty
+  //If the email and password are empty, return
   if (!email || !password) return;
 
   //Return the user object that created from the email and password
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+//This function will sign out the user from the firebase authentication
+export const signOutUser = async () => await signOut(auth);
