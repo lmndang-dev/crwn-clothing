@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 //Firestone database library
@@ -102,4 +103,11 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
   //Return the user object that created from the email and password
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  //Return the user object that created from the email and password
+  return await signInWithEmailAndPassword(auth, email, password);
 };
