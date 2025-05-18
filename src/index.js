@@ -7,6 +7,7 @@ import "./index.scss";
 import App from "./App";
 import { UserProvider } from "./contexts/user.context";
 import { ProductsProvider } from "./contexts/products.context";
+import { CartProvider } from "./contexts/cart.context";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -25,7 +26,12 @@ root.render(
         {/* This allows any component in the app to access the products context using the useContext hook */}
         {/* The ProductsProvider component is imported from the products.context file */}
         <ProductsProvider>
-          <App />
+          {/* The CartContext component wraps the App component, providing the cart context to all components within the app */}
+          {/* This allows any component in the app to access the cart context using the useContext hook */}
+          {/* The CartContext component is imported from the cart.context file */}
+          <CartProvider>
+            <App />
+          </CartProvider>
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>

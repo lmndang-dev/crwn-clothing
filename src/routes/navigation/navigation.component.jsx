@@ -11,6 +11,8 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
 import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart.context";
+
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
@@ -20,6 +22,8 @@ const Navigation = () => {
   //Get the currentUser from the UserContext
   //The UserContext is imported from the user.context file
   const { currentUser } = useContext(UserContext);
+
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
@@ -50,7 +54,7 @@ const Navigation = () => {
           {/* Add cart icon to navigation bar */}
           <CartIcon />
         </div>
-        <CartDropdown />
+        {isCartOpen && <CartDropdown />}
       </div>
 
       {/* This outlet help navigate the page under the navigation bar */}
