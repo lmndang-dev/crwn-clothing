@@ -7,7 +7,7 @@ import { CartContext } from "../../contexts/cart.context";
 import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
 
   const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
 
@@ -18,7 +18,7 @@ const CartIcon = () => {
       {/* The itemCount is a placeholder for the number of items in the cart */}
       {/* In a real application, this would be replaced with a state or prop */}
       {/* that tracks the number of items in the cart */}
-      <span className="item-count">0</span>
+      <span className="item-count">{cartCount}</span>
     </div>
   );
 };
