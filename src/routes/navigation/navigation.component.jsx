@@ -17,13 +17,7 @@ import "./navigation.styles.scss";
 const Navigation = () => {
   //Get the currentUser from the UserContext
   //The UserContext is imported from the user.context file
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  const signOutHandler = async () => {
-    //Sign out the user from the firebase authentication
-    await signOutUser();
-    setCurrentUser(null);
-  };
+  const { currentUser } = useContext(UserContext);
 
   return (
     <Fragment>
@@ -42,7 +36,7 @@ const Navigation = () => {
 
           {/* If user is logged in, show the sign out button */}
           {currentUser ? (
-            <span className="nav-link" onClick={signOutHandler}>
+            <span className="nav-link" onClick={signOutUser}>
               SIGN OUT
             </span>
           ) : (

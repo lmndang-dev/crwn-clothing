@@ -11,6 +11,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 //Firestore database library
@@ -132,3 +133,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 //This function will sign out the user from the firebase authentication
 export const signOutUser = async () => await signOut(auth);
+
+//This function will check if the user is authenticated or not
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
