@@ -4,7 +4,6 @@ import { initializeApp } from "firebase/app";
 //Google sign in authentication library
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -33,26 +32,34 @@ const firebaseConfig = {
   appId: "1:1097680397917:web:020643b01337a8c60a8fb4",
 };
 
-// Initialize Firebase
+//Initialize the firebase app with the firebaseConfig object
+//This will create a new firebase app instance
 const firebaseApp = initializeApp(firebaseConfig);
 
 //Declare the google windows to choose the Google account for authenticate
 const googleProvider = new GoogleAuthProvider();
+
+//Set the Google provider to only allow the user to select the account
+// that is already logged in to the Google account
 googleProvider.setCustomParameters({
   prompt: "select_account",
 });
+
+//Export the auth object to use in other components
+//Get the authentication object from firebase app
+//This object will be used to sign in the user with Google  or email and password
 export const auth = getAuth();
 
 //Sign in with Google popup
+//This function will open a popup window to sign in with Google
+//This function will return the user object that is authenticated with Google
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
-//Sign in with redirect
-export const signInWithGoogleRedirect = () =>
-  signInWithRedirect(auth, googleProvider);
-
-//Added user that authenticated in to the firestore database user the users list
+/*============= Added user that authenticated in to the firestore database user the users list =============*/
 //Create database object
+//Get the firestore object from firebase app
+//This object will be used to interact with the firestore database
 export const db = getFirestore();
 
 //Function to added authenticated user to users collection
@@ -97,7 +104,10 @@ export const createUserDocumentFromAuth = async (
 
   return userDocRef;
 };
+/*============= Added user that authenticated in to the firestore database user the users list =============*/
 
+//This function will create a new user with email and password
+//This function will return the user object that is authenticated with email and password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
@@ -105,6 +115,8 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
+//This function will sign in the user with email and password
+//This function will return the user object that is authenticated with email and password
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
