@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+
+import { UserContext } from "../../contexts/user.context";
 
 import {
   //auth,
@@ -26,6 +28,10 @@ const SignInForm = () => {
 
   //Destructured attributes from the fromFields
   const { email, password } = formFields;
+
+  //Get the currentUser from the UserContext
+  //The UserContext is imported from the user.context file
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     //Set the formFields to the defaultFormField
@@ -52,6 +58,10 @@ const SignInForm = () => {
         email,
         password
       );
+
+      //Set the currentUser to the user that is signed in
+      //The user is the user that is signed in
+      setCurrentUser(user);
 
       //Reset the form fields to the default form field
       resetFormFields();

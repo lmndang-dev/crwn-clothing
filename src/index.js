@@ -3,14 +3,25 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import "./index.scss";
+
 import App from "./App";
+import { UserProvider } from "./contexts/user.context";
+
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    {/* The BrowserRouter component wraps the entire application, enabling routing functionality */}
+    {/* This allows the app to use React Router for navigation and routing */}
+    {/* The BrowserRouter component is imported from the react-router-dom library */}
     <BrowserRouter>
-      <App />
+      {/* The UserProvider component wraps the App component, providing the user context to all components within the app */}
+      {/* This allows any component in the app to access the user context using the useContext hook */}
+      {/* The UserProvider component is imported from the user.context file */}
+      <UserProvider>
+        <App />
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
