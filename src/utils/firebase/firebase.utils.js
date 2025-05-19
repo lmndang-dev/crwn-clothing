@@ -23,7 +23,10 @@ import {
   doc,
   getDoc,
   setDoc,
-  snapshotEqual,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
 } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -68,6 +71,43 @@ export const signInWithGooglePopup = () =>
 //Get the firestore object from firebase app
 //This object will be used to interact with the firestore database
 export const db = getFirestore();
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  //Create a reference to the collection in the database
+  const collectionRef = collection(db, collectionKey);
+
+  //Create a batch object to perform multiple write operations
+  const batch = writeBatch(db);
+
+  //Loop through the objects to add and set each document in the collection
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  //Commit the batch write operation
+  await batch.commit();
+  console.log("done");
+};
+
+export const getCategoriesAndDocuments = async () => {
+  //Create a reference to the collection in the database
+  const collectionRef = collection(db, "categories");
+
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
+};
 
 //Function to added authenticated user to users collection
 export const createUserDocumentFromAuth = async (
