@@ -1,4 +1,8 @@
-import "./directory-item.styles.scss";
+import {
+  BackgroundImage,
+  Body,
+  DirectoryItemContainer,
+} from "./directory-item.styles";
 
 const DirectoryItem = ({ category }) => {
   //Destructured item from category object
@@ -11,16 +15,16 @@ const DirectoryItem = ({ category }) => {
 
   //Return the container of one category item
   return (
-    <div className="directory-item-container">
-      <div
-        className="background-image"
-        style={{ backgroundImage: `url(${imageUrl})` }}
+    <DirectoryItemContainer>
+      <BackgroundImage
+        imageUrl={imageUrl}
+        // The imageUrl prop is used to set the background image of the div
       />
-      <div className="body">
+      <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>
-      </div>
-    </div>
+      </Body>
+    </DirectoryItemContainer>
   );
 };
 
