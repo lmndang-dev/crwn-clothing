@@ -1,3 +1,4 @@
+import { clear } from "@testing-library/user-event/dist/clear";
 import { createContext, useState, useEffect, use } from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
@@ -47,6 +48,11 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   );
 };
 
+// Function to clear the a cart item
+const clearCartItem = (cartItems, cartItemToClear) => {
+  return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+};
+
 // Create the CartContext
 export const CartContext = createContext({
   isCartOpen: false,
@@ -55,6 +61,8 @@ export const CartContext = createContext({
   addItemToCart: () => {},
   cartCount: 0,
   removeItemFromCart: () => {},
+  clearItemFromCart: () => {},
+  total: 0,
 });
 
 // CartProvider component
@@ -88,6 +96,10 @@ export const CartProvider = ({ children }) => {
     setCartItems(removeCartItem(cartItems, cartItemToRemove));
   };
 
+  const clearItemFromCart = (cartItemToClear) => {
+    setCartItems(clearCartItem(cartItems, cartItemToClear));
+  };
+
   const value = {
     isCartOpen,
     setIsCartOpen,
@@ -95,6 +107,7 @@ export const CartProvider = ({ children }) => {
     addItemToCart,
     cartCount,
     removeItemFromCart,
+    clearItemFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
