@@ -1,5 +1,4 @@
-import { clear } from "@testing-library/user-event/dist/clear";
-import { createContext, useState, useEffect, use } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
   // Find if the item already exists in the cart

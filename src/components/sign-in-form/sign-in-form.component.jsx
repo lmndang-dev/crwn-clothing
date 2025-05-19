@@ -6,8 +6,6 @@ import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import {
   //auth,
   signInWithGooglePopup,
-  //signInWithGoogleRedirect,
-  createUserDocumentFromAuth,
   //Authenticate user with email and password
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
@@ -47,10 +45,7 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
 
       //Reset the form fields to the default form field
       resetFormFields();
