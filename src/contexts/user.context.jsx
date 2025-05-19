@@ -4,6 +4,8 @@ import { onAuthStateChangedListener } from "../utils/firebase/firebase.utils";
 
 import { createUserDocumentFromAuth } from "../utils/firebase/firebase.utils";
 
+import { createAction } from "../utils/reducer/reducer.utils";
+
 // Create the UserContext as the actual value that you want to access
 // in your components. This will be the context object that you will use
 export const UserContext = createContext({
@@ -49,7 +51,7 @@ export const UserProvider = ({ children }) => {
 
   const setCurrentUser = (user) => {
     // This function dispatches an action to update the current user in the state
-    dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
+    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
   };
 
   const value = { currentUser, setCurrentUser };
