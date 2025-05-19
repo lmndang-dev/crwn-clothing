@@ -15,7 +15,14 @@ import { CartContext } from "../../contexts/cart.context";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
-import "./navigation.styles.scss";
+//Import the navigation styles
+//The NavigationContainer is a styled component
+import {
+  NavigationContainer,
+  NavLinks,
+  NavLink,
+  LogoContainer,
+} from "./navigation.styles";
 
 //Outlet help nested navigation page and keep the navigation bar stay the same
 const Navigation = () => {
@@ -27,35 +34,31 @@ const Navigation = () => {
 
   return (
     <Fragment>
-      <div className="navigation">
+      <NavigationContainer>
         {/* The Link component in react routing behave similar to anchor html element */}
         {/* When user click on logo, direct user back to homepage */}
-        <Link className="logo-container" to="/">
+        <LogoContainer to="/">
           <CrwnLogo className="logo" />
-        </Link>
+        </LogoContainer>
 
-        <div className="nav-links-container">
+        <NavLinks>
           {/* Add shop route to navigation bar */}
-          <Link className="nav-link" to="/shop">
-            SHOP
-          </Link>
+          <NavLink to="/shop">SHOP</NavLink>
 
           {/* If user is logged in, show the sign out button */}
           {currentUser ? (
-            <span className="nav-link" onClick={signOutUser}>
+            <NavLink as="span" onClick={signOutUser}>
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
             // If user is not logged in, show the sign in button
-            <Link className="nav-link" to="/auth">
-              SIGN IN
-            </Link>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
           {/* Add cart icon to navigation bar */}
           <CartIcon />
-        </div>
+        </NavLinks>
         {isCartOpen && <CartDropdown />}
-      </div>
+      </NavigationContainer>
 
       {/* This outlet help navigate the page under the navigation bar */}
       {/* It can load the home page or the shop page etc. */}
