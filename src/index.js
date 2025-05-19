@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import "./index.scss";
 
 import App from "./App";
-import { UserProvider } from "./contexts/user.context";
+//import { UserProvider } from "./contexts/user.context";
 import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
 
@@ -25,19 +25,19 @@ root.render(
         {/* The UserProvider component wraps the App component, providing the user context to all components within the app */}
         {/* This allows any component in the app to access the user context using the useContext hook */}
         {/* The UserProvider component is imported from the user.context file */}
-        <UserProvider>
-          {/* The ProductsProvider component wraps the App component, providing the products context to all components within the app */}
-          {/* This allows any component in the app to access the products context using the useContext hook */}
-          {/* The ProductsProvider component is imported from the products.context file */}
-          <CategoriesProvider>
-            {/* The CartContext component wraps the App component, providing the cart context to all components within the app */}
-            {/* This allows any component in the app to access the cart context using the useContext hook */}
-            {/* The CartContext component is imported from the cart.context file */}
-            <CartProvider>
-              <App />
-            </CartProvider>
-          </CategoriesProvider>
-        </UserProvider>
+        {/* <UserProvider> */}
+        {/* The ProductsProvider component wraps the App component, providing the products context to all components within the app */}
+        {/* This allows any component in the app to access the products context using the useContext hook */}
+        {/* The ProductsProvider component is imported from the products.context file */}
+        <CategoriesProvider>
+          {/* The CartContext component wraps the App component, providing the cart context to all components within the app */}
+          {/* This allows any component in the app to access the cart context using the useContext hook */}
+          {/* The CartContext component is imported from the cart.context file */}
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </CategoriesProvider>
+        {/* </UserProvider> */}
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
