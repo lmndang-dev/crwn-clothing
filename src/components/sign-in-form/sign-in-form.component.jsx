@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import {
   //auth,
@@ -107,7 +107,11 @@ const SignInForm = () => {
           {/* type="button" is to prevent the form from submitting */}
           {/* buttonType="google" is to style the button */}
           {/* onClick={signInWithGoogle} is to call the function when the button is clicked */}
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={signInWithGoogle}
+          >
             Google Sign In
           </Button>
         </div>
