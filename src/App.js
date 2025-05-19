@@ -18,6 +18,7 @@ import {
 const App = () => {
   const dispatch = useDispatch();
 
+  //Load user when the page load
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
@@ -30,6 +31,7 @@ const App = () => {
     // Cleanup the subscription when the component unmounts
     return unsubscribe;
   }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
