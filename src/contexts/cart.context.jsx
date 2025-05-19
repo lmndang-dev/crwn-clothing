@@ -62,7 +62,7 @@ export const CartContext = createContext({
   cartCount: 0,
   removeItemFromCart: () => {},
   clearItemFromCart: () => {},
-  total: 0,
+  cartTotal: 0,
 });
 
 // CartProvider component
@@ -70,6 +70,7 @@ export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   // This effect will run whenever the cartItems state changes
   // It will calculate the total number of items in the cart
@@ -84,6 +85,19 @@ export const CartProvider = ({ children }) => {
       0
     );
     setCartCount(newCartCount);
+  }, [cartItems]);
+
+  useEffect(() => {
+    // This function calculates the total price of the items in the cart
+    // by reducing the cartItems array to a single value
+    // total defaults to 0
+    // and item is the current item being processed in the array
+    // multiply the price of each item by its quantity and add it to the total
+    const newCartTotal = cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity * cartItem.price,
+      0
+    );
+    setCartTotal(newCartTotal);
   }, [cartItems]);
 
   // Function to add an item to the cart
@@ -108,6 +122,7 @@ export const CartProvider = ({ children }) => {
     cartCount,
     removeItemFromCart,
     clearItemFromCart,
+    cartTotal,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
