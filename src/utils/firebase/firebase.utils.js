@@ -44,7 +44,7 @@ const firebaseConfig = {
 
 //Initialize the firebase app with the firebaseConfig object
 //This will create a new firebase app instance
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 //Declare the google windows to choose the Google account for authenticate
 const googleProvider = new GoogleAuthProvider();
