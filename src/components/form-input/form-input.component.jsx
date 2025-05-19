@@ -1,11 +1,10 @@
-import "./form-input.styles.scss";
+import { FormInputLabel, Input, Group } from "./form-input.styles";
 
 const FormInput = ({ label, ...otherProps }) => {
   return (
-    <div className="group">
+    <Group>
       {/* Move up the label to the top of the input field when the user selected the input */}
-      <input
-        className="form-input"
+      <Input
         {...otherProps} // Spread operator to pass all other props to the input
         // This will include type, required, onChange, name, value, etc.
       />
@@ -13,16 +12,11 @@ const FormInput = ({ label, ...otherProps }) => {
       {/* The group class is used to style the input and label together */}
       {/* The label will only be shown if the label prop is passed */}
       {label && (
-        <label
-          className={`${
-            otherProps.value.length > 0 ? "shrink" : null
-          } form-input-label`}
-          // The label will have class shrink when the input has a value
-        >
+        <FormInputLabel shrink={otherProps.value.length}>
           {label}
-        </label>
+        </FormInputLabel>
       )}
-    </div>
+    </Group>
   );
 };
 
