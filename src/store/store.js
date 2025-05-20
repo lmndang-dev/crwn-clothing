@@ -2,6 +2,7 @@ import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { thunk } from "redux-thunk";
 
 import { rootReducer } from "./root-reducer";
 
@@ -14,9 +15,10 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 //Only using middleware for devTools in development stage
-const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
-  Boolean
-);
+const middleWares = [
+  process.env.NODE_ENV !== "production" && logger,
+  thunk,
+].filter(Boolean);
 
 //If not on production - use redux devtools otherwise use regular compose
 const composeEnhancer =
