@@ -8,12 +8,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import "./index.scss";
 
 import App from "./App";
 
-import { store } from "./store/store";
+import { store, persistor } from "./store/store";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -25,12 +26,14 @@ root.render(
      * This enables any component within the app to access the Redux state
      * and dispatch actions, facilitating global state management. */}
     <Provider store={store}>
-      {/* The BrowserRouter component wraps the entire application, enabling routing functionality */}
-      {/* This allows the app to use React Router for navigation and routing */}
-      {/* The BrowserRouter component is imported from the react-router-dom library */}
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        {/* The BrowserRouter component wraps the entire application, enabling routing functionality */}
+        {/* This allows the app to use React Router for navigation and routing */}
+        {/* The BrowserRouter component is imported from the react-router-dom library */}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
