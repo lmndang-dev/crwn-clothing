@@ -9,7 +9,8 @@ import { rootReducer } from "./root-reducer";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["user"], //User in Redux state will not be storage
+  //blacklist: ["user"], //User in Redux state will not be storage
+  whitelist: ["cart"], //Only cart information will be storage in local cart
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
