@@ -13,12 +13,19 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-//Only using middleware in development stage
-const middleWares = [process.env.NODE_ENV === "development" && logger].filter(
+//Only using middleware for devTools in development stage
+const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
   Boolean
 );
 
-const composeEnhancers = compose(applyMiddleware(...middleWares));
+//If not on production - use redux devtools otherwise use regular compose
+const composeEnhancer =
+  (process.env.NODE_ENV !== "production" &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+const composeEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 export const store = createStore(persistedReducer, undefined, composeEnhancers);
 
