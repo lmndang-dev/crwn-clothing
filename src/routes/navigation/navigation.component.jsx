@@ -1,10 +1,11 @@
 //Fragment is react features that wrap the elements
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 
 //Import outlet feature from react router
 //Link container help to navigate to another route
 import { Outlet } from "react-router-dom";
 
+//Use selector to get the attribute from redux
 import { useSelector } from "react-redux";
 
 import { selectCurrentUser } from "../../store/user/user.selector";
@@ -14,8 +15,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 //Create react element for the logo img
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
-//import { UserContext } from "../../contexts/user.context";
-import { CartContext } from "../../contexts/cart.context";
+import { selectIsCartOpen } from "../../store/cart/cart.selection";
 
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
@@ -35,7 +35,7 @@ const Navigation = () => {
   //const { currentUser } = useContext(UserContext);
   const currentUser = useSelector(selectCurrentUser);
 
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   return (
     <Fragment>
