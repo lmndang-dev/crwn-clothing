@@ -13,7 +13,10 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const middleWares = [logger];
+//Only using middleware in development stage
+const middleWares = [process.env.NODE_ENV === "development" && logger].filter(
+  Boolean
+);
 
 const composeEnhancers = compose(applyMiddleware(...middleWares));
 
